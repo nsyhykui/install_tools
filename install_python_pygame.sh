@@ -1,37 +1,36 @@
-#!/data/data/com . termux/files/usr/bin/bash
-# Termux Pygame极简安装脚本
+#!/data/data/com.termux/files/usr/bin/bash
+# Termux Pygame 极简安装脚本
 # 1.配置镜像源组
 termux-change-repo
-设置 -欧欧管道故障
-回声"🎯Pygame 2.6.1安装脚本"
+set -euo pipefail
+echo "🎯 Pygame 2.6.1 安装脚本"
 
 # 2. 仓库 + 依赖
-pkg更新表示“有…的”
-pkg安装表示“有…的”X11-回购
-pkg安装表示“有…的”python clang make
-SD L2 SD L2-混音器SD L2-图像sdl2-ttf
-xorgproto libx11 libxt libxext
-freetype libjpeg-turbo libpng pulseaudio termux-X11-nightly
+pkg update -y
+pkg install -y x11-repo
+pkg install -y python clang make \
+    sdl2 sdl2-mixer sdl2-image sdl2-ttf \
+    xorgproto libx11 libxt libxext \
+    freetype libjpeg-turbo libpng pulseaudio termux-x11-nightly
 
-# 3.SDL2配置
-ln-科幻 $前缀/bin/sdl2-config $前缀/bin/sdl-config
-出口 CFLAGS=“——我$前缀/include -I$前缀/include/X11 -I$PREFIX/include/SDL2"
-出口 LDFLAGS="-我$前缀/lib"
+# 3. SDL2 配置
+ln -sf $PREFIX/bin/sdl2-config $PREFIX/bin/sdl-config
+export CFLAGS="-I$PREFIX/include -I$PREFIX/include/X11 -I$PREFIX/include/SDL2"
+export LDFLAGS="-L$PREFIX/lib"
 
-# 4.直接指定清华源安装（不升级pip)
-点安装[构成来自拉丁语、结尾为-我们的名词的复数]https://pypi . tuna . Tsinghua . edu . cn/simple-前期-没有-缓存-dirpygame
+# 4. 直接指定清华源安装（不升级 pip）
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --pre --no-cache-dir pygame
 
 # 5. 写入环境
-猫> > ~ ~/。bashrc< < ' EOF '
-# Pygame配置
+cat >> ~/.bashrc <<'EOF'
+# Pygame 配置
 termux-x11 >/dev/null 2>&1 &
-pulseaudio-start >/dev/null 2 > & 1 &
-导出显示=:0
-导出SDL _音频驱动程序=脉冲音频
-文件结束
+pulseaudio --start >/dev/null 2>&1 &
+export DISPLAY=:0
+export SDL_AUDIODRIVER=pulseaudio
+EOF
 
-回声”✅ 安装完成！"
-
-# 下载本脚本
-# curl-L https://raw . githubusercontent . com/nsyhykui/install _ tools/main/install _ python _ py game . sh bash
-# 注意复制时不要把“#”复制上
+echo "✅ 安装完成！"
+# 下载运行本脚本
+# curl -L https://raw.githubusercontent.com/nsyhykui/install_tools/main/install_python_pygame.sh | bash
+# 复制上面内容，不加“#”

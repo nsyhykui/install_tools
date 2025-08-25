@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# Termux matplotlib + GUI 一键脚本（方案 B）
+# Termux matplotlib + GUI 一键脚本
 termux-change-repo
 set -euo pipefail
 
@@ -44,3 +44,15 @@ echo "  source ~/.bashrc"
 echo "  python3 -c \"import matplotlib; matplotlib.use('TkAgg'); import matplotlib.pyplot as plt; plt.plot([0,1,2],[0,1,4]); plt.show()\""
 echo "------------------------------------------------"
 
+# 示例代码
+# python3 - <<'PY'
+# import matplotlib
+# matplotlib.use('TkAgg')        # 或 'Qt5Agg'，但需额外装 PyQt5
+# import matplotlib.pyplot as plt
+# import numpy as np
+# x = np.linspace(0, 2*np.pi, 100)
+# y = np.sin(x)
+# plt.plot(x, y)
+# plt.title('Termux + matplotlib')
+# plt.show()
+# PY
